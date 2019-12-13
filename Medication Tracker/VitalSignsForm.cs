@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Data;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,15 +15,19 @@ namespace Medication_Tracker
 {
     public partial class VitalSignsForm : Form
     {
-        public double Temp { get; set; }
+        DataConnection data;
+        public decimal Temp { get; set; }
         public int BloodPressureTop { get; set; }
         public int BloodPressureBottom { get; set; }
         public int Pulse { get; set; }
         public byte Oxygen { get; set; }
         public byte Respiration { get; set; }
+        public int PatientID { get; set; }
 
-        public VitalSignsForm()
+        public VitalSignsForm(int patientID)
         {
+            PatientID = patientID;
+            data = new DataConnection();
             InitializeComponent();
         }
 
@@ -32,6 +39,21 @@ namespace Medication_Tracker
            
         }
 
+        private void saveVitalSignsToDB()
+        {
+            ArrayList param = new ArrayList()
+                {
+                    new SqlParameter("@patientID", PatientID),
+                    new SqlParameter("@pulse",  Pulse),
+                    new SqlParameter("@bpt",  BloodPressureTop),
+                    new SqlParameter("@bpb",  BloodPressureBottom),
+                    new SqlParameter("@oxygen",  Oxygen),
+                    new SqlParameter("@resp",  Respiration),
+                    new SqlParameter("@temp",  Temp)
+                };
+            data.GetDataSet("SaveVitalSigns", param);
+           
+        }
         private void BtnSaveVitalSigns_Click(object sender, EventArgs e)
         {
                                
@@ -41,7 +63,7 @@ namespace Medication_Tracker
             }
             else
             {
-                Temp = double.Parse(txtTemp.Text);
+                Temp = decimal.Parse(txtTemp.Text);
                
             }
             if (txtPulse == null && txtPulse.Text == string.Empty)
@@ -90,6 +112,7 @@ namespace Medication_Tracker
 
             }
 
+            saveVitalSignsToDB();
             DialogResult = DialogResult.OK;
                    
         }

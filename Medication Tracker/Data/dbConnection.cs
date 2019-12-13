@@ -41,12 +41,12 @@ namespace Data
         public DataSet GetDataSet(string proc)
         {
             openConnection();
-            SqlCommand proceedure = new SqlCommand(proc, conn, transaction);
-            proceedure.ExecuteNonQuery();
-            closeConnection();
-            SqlDataAdapter adapter = new SqlDataAdapter(proceedure);
+            SqlCommand procedure = new SqlCommand(proc, conn, transaction);
+            procedure.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapter = new SqlDataAdapter(procedure);
             DataSet ds = new DataSet();
             adapter.Fill(ds);
+            closeConnection();
             return ds;
         }
 
@@ -59,11 +59,10 @@ namespace Data
             {
                 procedure.Parameters.Add(parameter);
             }
-            procedure.ExecuteNonQuery();
-            closeConnection();
             SqlDataAdapter adapter = new SqlDataAdapter(procedure);
             DataSet ds = new DataSet();
             adapter.Fill(ds);
+            closeConnection();
             return ds;
         }
 

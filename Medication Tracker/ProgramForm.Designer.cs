@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProgramForm));
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.btnDueNow = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.btnYes = new System.Windows.Forms.Button();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblMedName = new System.Windows.Forms.Label();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.cmbPatient = new System.Windows.Forms.ComboBox();
             this.btnAddVitalSigns = new System.Windows.Forms.Button();
             this.lblPatient = new System.Windows.Forms.Label();
@@ -68,13 +68,17 @@
             this.lblLine = new System.Windows.Forms.Label();
             this.lblO2_Display = new System.Windows.Forms.Label();
             this.lblO2 = new System.Windows.Forms.Label();
+            this.lblCurrentTime_Display = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pnlMeds = new System.Windows.Forms.Panel();
             this.pnlInit.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.pnlMeds.SuspendLayout();
             this.SuspendLayout();
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(955, 47);
+            this.monthCalendar1.Location = new System.Drawing.Point(968, 79);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 0;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar1_DateChanged);
@@ -102,6 +106,7 @@
             this.btnViewAll.TabIndex = 3;
             this.btnViewAll.Text = "View All";
             this.btnViewAll.UseVisualStyleBackColor = false;
+            this.btnViewAll.Click += new System.EventHandler(this.BtnViewAll_Click);
             // 
             // pnlInit
             // 
@@ -112,7 +117,7 @@
             this.pnlInit.Controls.Add(this.btnYes);
             this.pnlInit.Controls.Add(this.lblTime);
             this.pnlInit.Controls.Add(this.lblMedName);
-            this.pnlInit.Location = new System.Drawing.Point(11, 309);
+            this.pnlInit.Location = new System.Drawing.Point(3, 3);
             this.pnlInit.Name = "pnlInit";
             this.pnlInit.Size = new System.Drawing.Size(577, 144);
             this.pnlInit.TabIndex = 4;
@@ -148,6 +153,7 @@
             this.btnNo.TabIndex = 5;
             this.btnNo.Text = "N";
             this.btnNo.UseVisualStyleBackColor = false;
+            this.btnNo.Click += new System.EventHandler(this.BtnNo_Click);
             // 
             // btnYes
             // 
@@ -159,6 +165,7 @@
             this.btnYes.TabIndex = 3;
             this.btnYes.Text = "Y";
             this.btnYes.UseVisualStyleBackColor = false;
+            this.btnYes.Click += new System.EventHandler(this.BtnYes_Click);
             // 
             // lblTime
             // 
@@ -180,13 +187,6 @@
             this.lblMedName.TabIndex = 0;
             this.lblMedName.Text = "Tylenol Acetaminophen";
             // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(1223, 292);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(27, 472);
-            this.vScrollBar1.TabIndex = 12;
-            // 
             // cmbPatient
             // 
             this.cmbPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -195,12 +195,13 @@
             this.cmbPatient.Name = "cmbPatient";
             this.cmbPatient.Size = new System.Drawing.Size(376, 44);
             this.cmbPatient.TabIndex = 13;
+            this.cmbPatient.SelectedIndexChanged += new System.EventHandler(this.CmbPatient_SelectedIndexChanged);
             // 
             // btnAddVitalSigns
             // 
             this.btnAddVitalSigns.BackColor = System.Drawing.Color.White;
             this.btnAddVitalSigns.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddVitalSigns.Location = new System.Drawing.Point(643, 235);
+            this.btnAddVitalSigns.Location = new System.Drawing.Point(630, 239);
             this.btnAddVitalSigns.Name = "btnAddVitalSigns";
             this.btnAddVitalSigns.Size = new System.Drawing.Size(156, 47);
             this.btnAddVitalSigns.TabIndex = 14;
@@ -306,9 +307,10 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1251, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1263, 28);
             this.menuStrip1.TabIndex = 31;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MenuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -323,14 +325,14 @@
             // addPatientToolStripMenuItem
             // 
             this.addPatientToolStripMenuItem.Name = "addPatientToolStripMenuItem";
-            this.addPatientToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.addPatientToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.addPatientToolStripMenuItem.Text = "Add Patient";
             this.addPatientToolStripMenuItem.Click += new System.EventHandler(this.AddPatientToolStripMenuItem_Click);
             // 
             // changeMedicationsToolStripMenuItem
             // 
             this.changeMedicationsToolStripMenuItem.Name = "changeMedicationsToolStripMenuItem";
-            this.changeMedicationsToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.changeMedicationsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.changeMedicationsToolStripMenuItem.Text = "Search Medications";
             this.changeMedicationsToolStripMenuItem.Click += new System.EventHandler(this.ChangeMedicationsToolStripMenuItem_Click);
             // 
@@ -338,7 +340,7 @@
             // 
             this.lblBPT_Display.AutoSize = true;
             this.lblBPT_Display.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBPT_Display.Location = new System.Drawing.Point(830, 76);
+            this.lblBPT_Display.Location = new System.Drawing.Point(817, 80);
             this.lblBPT_Display.Name = "lblBPT_Display";
             this.lblBPT_Display.Size = new System.Drawing.Size(40, 24);
             this.lblBPT_Display.TabIndex = 39;
@@ -348,7 +350,7 @@
             // 
             this.lblR_Display.AutoSize = true;
             this.lblR_Display.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblR_Display.Location = new System.Drawing.Point(680, 167);
+            this.lblR_Display.Location = new System.Drawing.Point(667, 171);
             this.lblR_Display.Name = "lblR_Display";
             this.lblR_Display.Size = new System.Drawing.Size(30, 24);
             this.lblR_Display.TabIndex = 38;
@@ -358,7 +360,7 @@
             // 
             this.lblP_Display.AutoSize = true;
             this.lblP_Display.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblP_Display.Location = new System.Drawing.Point(680, 122);
+            this.lblP_Display.Location = new System.Drawing.Point(667, 126);
             this.lblP_Display.Name = "lblP_Display";
             this.lblP_Display.Size = new System.Drawing.Size(30, 24);
             this.lblP_Display.TabIndex = 37;
@@ -368,7 +370,7 @@
             // 
             this.lblT_Display.AutoSize = true;
             this.lblT_Display.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblT_Display.Location = new System.Drawing.Point(677, 82);
+            this.lblT_Display.Location = new System.Drawing.Point(664, 86);
             this.lblT_Display.Name = "lblT_Display";
             this.lblT_Display.Size = new System.Drawing.Size(45, 24);
             this.lblT_Display.TabIndex = 36;
@@ -378,7 +380,7 @@
             // 
             this.lblP.AutoSize = true;
             this.lblP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblP.Location = new System.Drawing.Point(643, 121);
+            this.lblP.Location = new System.Drawing.Point(630, 125);
             this.lblP.Name = "lblP";
             this.lblP.Size = new System.Drawing.Size(31, 25);
             this.lblP.TabIndex = 35;
@@ -388,7 +390,7 @@
             // 
             this.lblBP.AutoSize = true;
             this.lblBP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBP.Location = new System.Drawing.Point(779, 82);
+            this.lblBP.Location = new System.Drawing.Point(766, 86);
             this.lblBP.Name = "lblBP";
             this.lblBP.Size = new System.Drawing.Size(44, 24);
             this.lblBP.TabIndex = 34;
@@ -398,7 +400,7 @@
             // 
             this.lblR.AutoSize = true;
             this.lblR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblR.Location = new System.Drawing.Point(643, 167);
+            this.lblR.Location = new System.Drawing.Point(630, 171);
             this.lblR.Name = "lblR";
             this.lblR.Size = new System.Drawing.Size(31, 25);
             this.lblR.TabIndex = 33;
@@ -408,7 +410,7 @@
             // 
             this.lblT.AutoSize = true;
             this.lblT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblT.Location = new System.Drawing.Point(644, 82);
+            this.lblT.Location = new System.Drawing.Point(631, 86);
             this.lblT.Name = "lblT";
             this.lblT.Size = new System.Drawing.Size(27, 24);
             this.lblT.TabIndex = 32;
@@ -418,7 +420,7 @@
             // 
             this.lblVitalSigns_Text.AutoSize = true;
             this.lblVitalSigns_Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVitalSigns_Text.Location = new System.Drawing.Point(639, 43);
+            this.lblVitalSigns_Text.Location = new System.Drawing.Point(626, 47);
             this.lblVitalSigns_Text.Name = "lblVitalSigns_Text";
             this.lblVitalSigns_Text.Size = new System.Drawing.Size(108, 24);
             this.lblVitalSigns_Text.TabIndex = 40;
@@ -428,7 +430,7 @@
             // 
             this.lblBPB_Display.AutoSize = true;
             this.lblBPB_Display.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBPB_Display.Location = new System.Drawing.Point(840, 109);
+            this.lblBPB_Display.Location = new System.Drawing.Point(827, 113);
             this.lblBPB_Display.Name = "lblBPB_Display";
             this.lblBPB_Display.Size = new System.Drawing.Size(30, 24);
             this.lblBPB_Display.TabIndex = 41;
@@ -438,7 +440,7 @@
             // 
             this.lblLine.AutoSize = true;
             this.lblLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLine.Location = new System.Drawing.Point(830, 82);
+            this.lblLine.Location = new System.Drawing.Point(817, 86);
             this.lblLine.Name = "lblLine";
             this.lblLine.Size = new System.Drawing.Size(50, 24);
             this.lblLine.TabIndex = 42;
@@ -448,7 +450,7 @@
             // 
             this.lblO2_Display.AutoSize = true;
             this.lblO2_Display.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblO2_Display.Location = new System.Drawing.Point(830, 168);
+            this.lblO2_Display.Location = new System.Drawing.Point(817, 172);
             this.lblO2_Display.Name = "lblO2_Display";
             this.lblO2_Display.Size = new System.Drawing.Size(30, 24);
             this.lblO2_Display.TabIndex = 44;
@@ -458,18 +460,48 @@
             // 
             this.lblO2.AutoSize = true;
             this.lblO2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblO2.Location = new System.Drawing.Point(775, 167);
+            this.lblO2.Location = new System.Drawing.Point(762, 171);
             this.lblO2.Name = "lblO2";
             this.lblO2.Size = new System.Drawing.Size(45, 25);
             this.lblO2.TabIndex = 43;
             this.lblO2.Text = "O2:";
             // 
+            // lblCurrentTime_Display
+            // 
+            this.lblCurrentTime_Display.AutoSize = true;
+            this.lblCurrentTime_Display.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentTime_Display.Location = new System.Drawing.Point(964, 50);
+            this.lblCurrentTime_Display.Name = "lblCurrentTime_Display";
+            this.lblCurrentTime_Display.Size = new System.Drawing.Size(97, 22);
+            this.lblCurrentTime_Display.TabIndex = 45;
+            this.lblCurrentTime_Display.Text = "Date Time";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
+            // pnlMeds
+            // 
+            this.pnlMeds.AutoScroll = true;
+            this.pnlMeds.AutoSize = true;
+            this.pnlMeds.Controls.Add(this.pnlInit);
+            this.pnlMeds.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlMeds.Location = new System.Drawing.Point(0, 843);
+            this.pnlMeds.MaximumSize = new System.Drawing.Size(1250, 550);
+            this.pnlMeds.MinimumSize = new System.Drawing.Size(1188, 150);
+            this.pnlMeds.Name = "pnlMeds";
+            this.pnlMeds.Size = new System.Drawing.Size(1250, 150);
+            this.pnlMeds.TabIndex = 46;
+            // 
             // ProgramForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1251, 751);
+            this.ClientSize = new System.Drawing.Size(1263, 993);
+            this.Controls.Add(this.pnlMeds);
+            this.Controls.Add(this.lblCurrentTime_Display);
             this.Controls.Add(this.lblBPB_Display);
             this.Controls.Add(this.lblO2_Display);
             this.Controls.Add(this.lblO2);
@@ -493,8 +525,6 @@
             this.Controls.Add(this.lblPatient);
             this.Controls.Add(this.btnAddVitalSigns);
             this.Controls.Add(this.cmbPatient);
-            this.Controls.Add(this.vScrollBar1);
-            this.Controls.Add(this.pnlInit);
             this.Controls.Add(this.btnViewAll);
             this.Controls.Add(this.btnDueNow);
             this.Controls.Add(this.monthCalendar1);
@@ -509,6 +539,7 @@
             this.pnlInit.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.pnlMeds.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,7 +555,6 @@
         private System.Windows.Forms.Label lblMedName;
         private System.Windows.Forms.Button btnNo;
         private System.Windows.Forms.Button btnYes;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.ComboBox cmbPatient;
         private System.Windows.Forms.Button btnAddVitalSigns;
         private System.Windows.Forms.Label lblPatient;
@@ -555,6 +585,9 @@
         public System.Windows.Forms.Label lblT_Display;
         private System.Windows.Forms.Label lblMed_Dose_Route;
         private System.Windows.Forms.Label lblMed_Symptom;
+        private System.Windows.Forms.Label lblCurrentTime_Display;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel pnlMeds;
     }
 }
 
