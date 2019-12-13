@@ -70,6 +70,7 @@
             this.cmbPatient.Name = "cmbPatient";
             this.cmbPatient.Size = new System.Drawing.Size(418, 44);
             this.cmbPatient.TabIndex = 15;
+            this.cmbPatient.SelectedIndexChanged += new System.EventHandler(this.CmbPatient_SelectedIndexChanged);
             // 
             // lblDOB
             // 
