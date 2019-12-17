@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -12,7 +13,7 @@ namespace Data
 
         public DataConnection()
         {
-            string strProject = "SNEAKOS\\SNEAKQL";
+            string strProject = "R8600376\\SNEAKQL";
             string strDatabase = "Medicine";
 
             string strconn = "data source=" + strProject +

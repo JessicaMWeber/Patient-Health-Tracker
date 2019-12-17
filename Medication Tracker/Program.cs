@@ -17,6 +17,7 @@ namespace Medication_Tracker
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ProgramForm());
+            //Application.Run(new AddMedForm());
         }
     }
 }

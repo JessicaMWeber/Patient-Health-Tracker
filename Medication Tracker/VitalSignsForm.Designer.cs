@@ -48,9 +48,10 @@
             // 
             this.lblO2.AutoSize = true;
             this.lblO2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblO2.Location = new System.Drawing.Point(23, 367);
+            this.lblO2.Location = new System.Drawing.Point(17, 298);
+            this.lblO2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblO2.Name = "lblO2";
-            this.lblO2.Size = new System.Drawing.Size(70, 38);
+            this.lblO2.Size = new System.Drawing.Size(58, 31);
             this.lblO2.TabIndex = 1;
             this.lblO2.Text = "O2:";
             // 
@@ -58,9 +59,10 @@
             // 
             this.lblTemp.AutoSize = true;
             this.lblTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTemp.Location = new System.Drawing.Point(23, 23);
+            this.lblTemp.Location = new System.Drawing.Point(17, 19);
+            this.lblTemp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTemp.Name = "lblTemp";
-            this.lblTemp.Size = new System.Drawing.Size(212, 38);
+            this.lblTemp.Size = new System.Drawing.Size(177, 31);
             this.lblTemp.TabIndex = 2;
             this.lblTemp.Text = "Temperature:";
             // 
@@ -68,9 +70,10 @@
             // 
             this.lblPulse.AutoSize = true;
             this.lblPulse.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPulse.Location = new System.Drawing.Point(23, 92);
+            this.lblPulse.Location = new System.Drawing.Point(17, 75);
+            this.lblPulse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPulse.Name = "lblPulse";
-            this.lblPulse.Size = new System.Drawing.Size(108, 38);
+            this.lblPulse.Size = new System.Drawing.Size(90, 31);
             this.lblPulse.TabIndex = 3;
             this.lblPulse.Text = "Pulse:";
             // 
@@ -78,9 +81,10 @@
             // 
             this.lblRespirations.AutoSize = true;
             this.lblRespirations.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRespirations.Location = new System.Drawing.Point(23, 165);
+            this.lblRespirations.Location = new System.Drawing.Point(17, 134);
+            this.lblRespirations.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRespirations.Name = "lblRespirations";
-            this.lblRespirations.Size = new System.Drawing.Size(208, 38);
+            this.lblRespirations.Size = new System.Drawing.Size(174, 31);
             this.lblRespirations.TabIndex = 4;
             this.lblRespirations.Text = "Respirations:";
             // 
@@ -88,67 +92,75 @@
             // 
             this.lblBloodPressure.AutoSize = true;
             this.lblBloodPressure.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBloodPressure.Location = new System.Drawing.Point(23, 261);
+            this.lblBloodPressure.Location = new System.Drawing.Point(17, 212);
+            this.lblBloodPressure.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBloodPressure.Name = "lblBloodPressure";
-            this.lblBloodPressure.Size = new System.Drawing.Size(250, 38);
+            this.lblBloodPressure.Size = new System.Drawing.Size(207, 31);
             this.lblBloodPressure.TabIndex = 5;
             this.lblBloodPressure.Text = "Blood Pressure:";
             // 
             // txtTemp
             // 
             this.txtTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTemp.Location = new System.Drawing.Point(306, 23);
+            this.txtTemp.Location = new System.Drawing.Point(230, 19);
+            this.txtTemp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtTemp.Name = "txtTemp";
-            this.txtTemp.Size = new System.Drawing.Size(100, 45);
+            this.txtTemp.Size = new System.Drawing.Size(76, 37);
             this.txtTemp.TabIndex = 15;
             // 
             // txtPulse
             // 
             this.txtPulse.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPulse.Location = new System.Drawing.Point(306, 92);
+            this.txtPulse.Location = new System.Drawing.Point(230, 75);
+            this.txtPulse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPulse.Name = "txtPulse";
-            this.txtPulse.Size = new System.Drawing.Size(100, 45);
+            this.txtPulse.Size = new System.Drawing.Size(76, 37);
             this.txtPulse.TabIndex = 16;
             // 
             // txtBP_Top
             // 
             this.txtBP_Top.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBP_Top.Location = new System.Drawing.Point(306, 237);
+            this.txtBP_Top.Location = new System.Drawing.Point(230, 193);
+            this.txtBP_Top.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBP_Top.Name = "txtBP_Top";
-            this.txtBP_Top.Size = new System.Drawing.Size(100, 45);
+            this.txtBP_Top.Size = new System.Drawing.Size(76, 37);
             this.txtBP_Top.TabIndex = 18;
             // 
             // txtRespirations
             // 
             this.txtRespirations.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRespirations.Location = new System.Drawing.Point(306, 162);
+            this.txtRespirations.Location = new System.Drawing.Point(230, 132);
+            this.txtRespirations.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtRespirations.Name = "txtRespirations";
-            this.txtRespirations.Size = new System.Drawing.Size(100, 45);
-            this.txtRespirations.TabIndex = 19;
+            this.txtRespirations.Size = new System.Drawing.Size(76, 37);
+            this.txtRespirations.TabIndex = 17;
             // 
             // txtBP_Bottom
             // 
             this.txtBP_Bottom.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBP_Bottom.Location = new System.Drawing.Point(306, 306);
+            this.txtBP_Bottom.Location = new System.Drawing.Point(230, 249);
+            this.txtBP_Bottom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBP_Bottom.Name = "txtBP_Bottom";
-            this.txtBP_Bottom.Size = new System.Drawing.Size(100, 45);
-            this.txtBP_Bottom.TabIndex = 20;
+            this.txtBP_Bottom.Size = new System.Drawing.Size(76, 37);
+            this.txtBP_Bottom.TabIndex = 19;
             // 
             // txtOxygen
             // 
             this.txtOxygen.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOxygen.Location = new System.Drawing.Point(306, 378);
+            this.txtOxygen.Location = new System.Drawing.Point(230, 307);
+            this.txtOxygen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtOxygen.Name = "txtOxygen";
-            this.txtOxygen.Size = new System.Drawing.Size(100, 45);
-            this.txtOxygen.TabIndex = 21;
+            this.txtOxygen.Size = new System.Drawing.Size(76, 37);
+            this.txtOxygen.TabIndex = 20;
             // 
             // lblLine
             // 
             this.lblLine.AutoSize = true;
             this.lblLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLine.Location = new System.Drawing.Point(294, 230);
+            this.lblLine.Location = new System.Drawing.Point(220, 187);
+            this.lblLine.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLine.Name = "lblLine";
-            this.lblLine.Size = new System.Drawing.Size(129, 69);
+            this.lblLine.Size = new System.Drawing.Size(102, 55);
             this.lblLine.TabIndex = 22;
             this.lblLine.Text = "___";
             // 
@@ -156,19 +168,20 @@
             // 
             this.btnSaveVitalSigns.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSaveVitalSigns.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveVitalSigns.Location = new System.Drawing.Point(114, 460);
+            this.btnSaveVitalSigns.Location = new System.Drawing.Point(86, 374);
+            this.btnSaveVitalSigns.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSaveVitalSigns.Name = "btnSaveVitalSigns";
-            this.btnSaveVitalSigns.Size = new System.Drawing.Size(205, 46);
+            this.btnSaveVitalSigns.Size = new System.Drawing.Size(154, 37);
             this.btnSaveVitalSigns.TabIndex = 23;
             this.btnSaveVitalSigns.Text = "Save";
             this.btnSaveVitalSigns.UseVisualStyleBackColor = false;
             this.btnSaveVitalSigns.Click += new System.EventHandler(this.BtnSaveVitalSigns_Click);
             // 
-            // VitalSigns
+            // VitalSignsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 536);
+            this.ClientSize = new System.Drawing.Size(334, 422);
             this.Controls.Add(this.btnSaveVitalSigns);
             this.Controls.Add(this.txtOxygen);
             this.Controls.Add(this.txtBP_Bottom);
@@ -183,9 +196,9 @@
             this.Controls.Add(this.lblO2);
             this.Controls.Add(this.lblLine);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "VitalSigns";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "VitalSignsForm";
             this.Text = "AddVitalSignsForm";
-            this.Load += new System.EventHandler(this.AddVitalSignsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

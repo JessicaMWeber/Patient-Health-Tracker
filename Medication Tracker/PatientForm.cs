@@ -1,71 +1,39 @@
-﻿using Data;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Medication_Tracker
 {
-    public partial class PatientForm : Form
+    partial class PatientForm : Form
     {
-        public string PatientName { get; set; }
-        public DateTime DOB { get; set; }
-        public int RoomNumber { get; set; }
-        public string Allergies { get; set; }
-        public string CodeStatus { get; set; }
-        public int ID { get; set; }
+        public Patient Patient { get; set; }
 
-        DataConnection data;
-
-        public PatientForm()
+        public PatientForm(Patient patient)
         {
+            Patient = patient;
+
+            CenterToScreen();
+
             InitializeComponent();
-            data = new DataConnection();
         }
-
-
-        private int savePatient()
-        {
-            ArrayList param = new ArrayList()
-                {
-                    new SqlParameter("@name", cmbPatient.Text),
-                    new SqlParameter("@bday", dtpPatientDOB.Value),
-                    new SqlParameter("@room", int.Parse(txtRoomNumber.Text)),
-                    new SqlParameter("@allergies", txtAllergies.Text),
-                    new SqlParameter("@codestatus", txtCodeStatus.Text),
-                    new SqlParameter("@pulse",  Convert.ToInt32(0)),
-                    new SqlParameter("@bpt",  Convert.ToInt32(0)),
-                    new SqlParameter("@bpb",  Convert.ToInt32(0)),
-                    new SqlParameter("@oxygen",  Convert.ToInt32(0)),
-                    new SqlParameter("@resp",  Convert.ToInt32(0)),
-                    new SqlParameter("@temp",  Convert.ToDecimal(0.0))
-                };
-            DataSet ds = data.GetDataSet("InsertPatient", param);
-            return (int) ds.Tables[0].Rows[0]["ID"];
-         }
 
         private void BtnAddPatient_Click(object sender, EventArgs e)
         {
-            ID = savePatient();
-            PatientName = cmbPatient.Text;
-            DOB = dtpPatientDOB.Value;
-            RoomNumber = int.Parse(txtRoomNumber.Text);
-            Allergies = txtAllergies.Text;
-            CodeStatus = txtCodeStatus.Text;
+            Patient = new Patient(0)
+            {
+                PatientName = txtName.Text,
+                DateOfBirth = dtpPatientDOB.Value,
+                Room = int.Parse(txtRoomNumber.Text),
+                Allergies = txtAllergies.Text,
+                CodeStatus = txtCodeStatus.Text
+            };
+            Patient.Save(insert : true);
            
             DialogResult = DialogResult.OK;
         }
 
-        private void CmbPatient_SelectedIndexChanged(object sender, EventArgs e)
+        private void PatientForm_Load(object sender, EventArgs e)
         {
-
+            ActiveControl = txtName;
         }
     }
 }
