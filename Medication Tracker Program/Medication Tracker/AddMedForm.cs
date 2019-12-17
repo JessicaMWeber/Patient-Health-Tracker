@@ -1,31 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Medication_Tracker
 {
     public partial class AddMedForm : Form
     {
-        public AddMedForm()
+        public string MedName { get; set; }
+        public string Dose { get; set; }
+        public string Route { get; set; }
+        public DateTime Time { get; set; }
+
+        public AddMedForm(string medName)
         {
             CenterToScreen();
 
             InitializeComponent();
-        }
 
-        private void AddMedForm_Load(object sender, EventArgs e)
-        {
+            MedName = medName;
 
+            lblName.Text = MedName;
         }
 
         private void BtnSaveMed_Click(object sender, EventArgs e)
         {
+            if(txtDose.Text == "" || txtDose.Text == "")
+            {
+                return;
+            }
+
+            Dose = txtDose.Text;
+            Route = txtRoute.Text;
+            Time = dtpMedTime.Value;
+
             DialogResult = DialogResult.OK;
         }
     }
