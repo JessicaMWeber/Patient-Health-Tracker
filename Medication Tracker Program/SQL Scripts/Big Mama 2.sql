@@ -1,24 +1,23 @@
 USE Workingtemp
 GO
 
-DROP PROC dbo.AddMedToPatient
-DROP PROC dbo.AddPatient
-DROP PROC dbo.GetMedicationByName
-DROP PROC dbo.GetMedicationsBySymptom
-DROP PROC dbo.GetPatient
-DROP PROC dbo.GetPatientIDS
-DROP PROC dbo.InsertPatient
-DROP PROC dbo.LoadPatientandVitals
-DROP PROC dbo.SavePatient
-DROP PROC dbo.SaveVitalSigns
-DROP PROC dbo.InsertMedsForPatient
-DROP PROC dbo.GetMedsForPatient
+DROP PROC [CAPITAL\avankeulen3].[AddMedToPatient]
+DROP PROC [CAPITAL\avankeulen3].[AddPatient]
+DROP PROC [CAPITAL\avankeulen3].[GetMedicationByName]
+DROP PROC [CAPITAL\avankeulen3].[GetMedicationsBySymptom]
+DROP PROC [CAPITAL\avankeulen3].[GetPatient]
+DROP PROC [CAPITAL\avankeulen3].[GetPatientIDS]
+DROP PROC [CAPITAL\avankeulen3].[InsertMedsForPatient]
+DROP PROC [CAPITAL\avankeulen3].[LoadPatientandVitals]
+DROP PROC [CAPITAL\avankeulen3].[SavePatient]
+DROP PROC [CAPITAL\avankeulen3].[SaveVitalSigns]
+DROP PROC [CAPITAL\avankeulen3].[GetMedsForPatient]
 GO
 
-DROP TABLE MedsForPatient
-DROP TABLE Medications
-DROP TABLE VitalSigns
-DROP TABLE Patient
+DROP TABLE [CAPITAL\avankeulen3].[MedsForPatient]
+DROP TABLE [CAPITAL\avankeulen3].[Medications]
+DROP TABLE [CAPITAL\avankeulen3].[VitalSigns]
+DROP TABLE [CAPITAL\avankeulen3].[Patient]
 GO
 
 CREATE TABLE Patient
@@ -68,24 +67,10 @@ CREATE PROCEDURE LoadPatientandVitals
 @id int
 AS
 BEGIN
-	SELECT p.ID, PatientName, DateOfBirth, Room, Allergies, CodeStatus, Pulse, BloodPressureTop, BloodPressureBottom, Oxygen, Respiration, Temp  FROM Patient p
+	SELECT p.ID, [PatientName], DateOfBirth, Room, Allergies, CodeStatus, Pulse, BloodPressureTop, BloodPressureBottom, Oxygen, Respiration, Temp  FROM Patient p
 	INNER JOIN VitalSigns vs
 	ON p.ID = VS.PatientID
 	WHERE p.ID = @id
-END
-GO
-
-CREATE PROC AddPatient
-@PatientName VARCHAR(100),
-@DateOfBirth datetime2,
-@Room int,
-@Allergies varchar(200),
-@CodeStatus varchar(100)
-AS
-BEGIN
-	INSERT INTO Patient
-	VALUES
-	(@PatientName, @DateOfBirth, @Room, @Allergies, @CodeStatus)
 END
 GO
 
@@ -126,18 +111,18 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE InsertPatient
-@name VARCHAR(100),
-@bday DATETIME2,
-@room int,
-@allergies VARCHAR(100),
-@codestatus VARCHAR(100),
-@pulse int,
+CREATE PROCEDURE AddPatient
+@PatientName VARCHAR(100),
+@DateOfBirth DATETIME2,
+@Room int,
+@Allergies VARCHAR(100),
+@CodeStatus VARCHAR(100),
+@Pulse int,
 @BloodPressureTop int,
 @BloodPressureBottom int,
-@oxygen int,
-@resp int,
-@temp decimal
+@Oxygen int,
+@Respiration int,
+@Temp decimal
 AS
 BEGIN
 	DECLARE @Table TABLE (ID int)
@@ -145,14 +130,14 @@ BEGIN
 
 	INSERT INTO Patient
 	OUTPUT INSERTED.ID INTO @Table
-	VALUES (@name, @bday, @room, @allergies, @codestatus)
+	VALUES (@PatientName, @DateOfBirth, @Room, @Allergies, @CodeStatus)
 
 	SELECT @PatientID = ID FROM @Table
 
 	INSERT INTO VitalSigns 
-	VALUES (@PatientID, @pulse , @BloodPressureTop , @BloodPressureBottom, @oxygen, @resp, @temp)
+	VALUES (@PatientID, @Pulse , @BloodPressureTop , @BloodPressureBottom, @oxygen, @Respiration, @Temp)
 
-	SELECT @PatientID ID
+	SELECT SCOPE_IDENTITY() As ID
 END
 GO
 
@@ -169,30 +154,56 @@ END
 GO
 
 CREATE OR ALTER PROCEDURE SavePatient
-@patientID int,
-@name VARCHAR(100),
-@bday DATETIME2,
-@room int,
-@allergies VARCHAR(100),
-@codestatus VARCHAR(100)
+@ID INT,
+@PatientName VARCHAR(100),
+@DateOfBirth DATETIME2,
+@Room int,
+@Allergies VARCHAR(100),
+@CodeStatus VARCHAR(100),
+@Pulse int,
+@BloodPressureTop int,
+@BloodPressureBottom int,
+@Oxygen int,
+@Respiration int,
+@Temp decimal
 AS 
 BEGIN
 
 	UPDATE Patient
-	SET PatientName = @name,
-		DateOfBirth = @bday,
-		Room = @room,
-		Allergies = @allergies,
-		CodeStatus = @codestatus
-	WHERE ID = @patientID
+	SET [PatientName] = @PatientName,
+		DateOfBirth = @DateOfBirth,
+		Room = @Room,
+		Allergies = @Allergies,
+		CodeStatus = @CodeStatus
+	WHERE ID = @ID
+
+	UPDATE VitalSigns
+	SET Pulse = @Pulse,
+		BloodPressureTop = @BloodPressureTop,
+		BloodPressureBottom = @BloodPressureBottom,
+		Oxygen = @Oxygen,
+		Respiration = @Respiration,
+		Temp = @Temp
+	WHERE PatientID = @ID
 END
 GO
 
 CREATE PROCEDURE GetPatientIDS
 AS
 BEGIN
-	SELECT PatientName, ID FROM Patient
+	SELECT [PatientName], ID FROM Patient
 	ORDER BY ID
+END
+GO
+
+CREATE PROCEDURE GetMedsForPatient
+@PatientID int
+AS
+BEGIN
+	SELECT m.ID, m.Name, m.Symptom, mfp.Dose, mfp.Route, mfp.MedTime FROM MedsForPatient mfp
+	INNER JOIN Medications m
+	ON m.ID = mfp.MedID
+	WHERE mfp.PatientID = @PatientID
 END
 GO
 
@@ -225,17 +236,6 @@ BEGIN
 	INSERT INTO MedsForPatient
 	VALUES
 	( @medID, @PatientID, @Dose, @Route, @MedTime )
-END
-GO
-
-CREATE PROCEDURE GetMedsForPatient
-@PatientID int
-AS
-BEGIN
-	SELECT m.ID, m.Name, m.Symptom, mfp.Dose, mfp.Route, mfp.MedTime FROM MedsForPatient mfp
-	INNER JOIN Medications m
-	ON m.ID = mfp.MedID
-	WHERE mfp.PatientID = @PatientID
 END
 GO
 

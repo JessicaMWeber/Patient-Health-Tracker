@@ -54,6 +54,7 @@
       <DependentUpon>AddMedForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\dbConnection.cs" />
+    <Compile Include="Data\dbObject.cs" />
     <Compile Include="Meds.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="VitalSignsForm.cs">
