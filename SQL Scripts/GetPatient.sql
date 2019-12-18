@@ -1,7 +1,0 @@
-CREATE OR ALTER PROCEDURE GetPatient
-@ID int
-AS
-BEGIN
-	SELECT * FROM Patient 
-	WHERE ID = @ID
-END
